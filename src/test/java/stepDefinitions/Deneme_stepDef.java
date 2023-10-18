@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import enums.COLOR;
 import enums.USER_INFO;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
@@ -7,11 +8,14 @@ import io.cucumber.java.en.Then;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.WebElement;
 import pojos.Class_Person;
 import utilities.ConfigurationReader;
 
 import java.util.List;
 import java.util.Map;
+
+import static stepDefinitions.Hooks.driver;
 
 public class Deneme_stepDef {
     String user1_email = "user1@gmail.com";
@@ -123,7 +127,7 @@ public class Deneme_stepDef {
 
     @Given("user goes to test page")
     public void userGoesToTestPage() {
-        System.out.println("I am going test environment");
+       driver.get("https://test.hypnotes.net/");
     }
 
 
@@ -169,5 +173,16 @@ public class Deneme_stepDef {
 
         // configuration kullanimi
         System.out.println("ConfigurationReader.getProperty(\"user1_email\") = " + ConfigurationReader.getProperty("user1_email"));
+    }
+
+
+    @Test
+    public void name() {
+        //COLOR color = new COLOR();
+
+        WebElement webElement = null;
+
+        COLOR.BLACK_TEXT.assertBackgroundColor(webElement);
+
     }
 }
