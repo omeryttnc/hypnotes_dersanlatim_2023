@@ -1,0 +1,27 @@
+css webelement bulma                             xpath weblement bulma
+
+. -> class                                       //tag[@attr=value]
+.features-btn                                    //a[@class='ant-btn css-15rg2km ant-btn-link features-btn']
+
+# -> id
+#sampleId                                       //a[@id='ant-btn css-15rg2km ant-btn-link features-btn']
+
+[attr=value]                                    //tag[text(),'sample']
+
+tag[attr=value]
+
+^ -> start with                              //tag[contains(@attr,value)]
+[href^='/features']
+
+$ -> end with
+[href$='/features']
+
+* -> contains
+[href*='/features']
+
+
+ve (iki farkli element)
+[href^='/features'].ant-btn                   //tag[@attr=value and @attr=value]
+
+veya (ikisinden birini)
+[href^='/features'],.ant-btn                  //tag[@attr=value or @attr=value]
