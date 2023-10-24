@@ -22,6 +22,12 @@ public class MyWebElementExtension {
 
     Assert.assertEquals(expectedColor,actualTextColor);
   }
+  public static void assertBackgroundColor(@This WebElement element, String expectedColor){
+
+    String actualTextColor=  element.getCssValue("background-color");
+
+    Assert.assertEquals(expectedColor,actualTextColor);
+  }
 
   public static void scrollToWebElement(@This WebElement webElement){
     ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",webElement);
