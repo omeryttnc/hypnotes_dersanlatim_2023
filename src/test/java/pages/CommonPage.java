@@ -1,5 +1,6 @@
 package pages;
 
+
 import org.openqa.selenium.support.PageFactory;
 
 import static stepDefinitions.Hooks.driver;
@@ -12,6 +13,14 @@ public abstract class CommonPage {
 
     private HomePage homePage;
     private RegisterPage registerPage;
+    private LoginPage loginPage;
+
+    public LoginPage getLoginPage() {
+        if (loginPage == null) {
+            loginPage= new LoginPage();
+        }
+        return loginPage;
+    }
 
     public HomePage getHomePage() {
         if (homePage == null) {

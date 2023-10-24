@@ -1,11 +1,11 @@
 package utilities;
 
 
-import manifold.ext.rt.api.This;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -65,10 +65,52 @@ public class BrowserUtilities {
 
     public static void waitFor(int sec) {
         try {
-            Thread.sleep(sec *1000);
+            Thread.sleep(sec * 1000L);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * method is used to get validation message property
+     *
+     * @param webElement is the element we used to get property
+     * @return validation message of Webelement
+     * @author omer
+     * @since 24.10.2023
+     */
+    public static String getValidationMessage(WebElement webElement) {
+        return webElement.getAttribute("validationMessage");
+    }
+
+
+    /**
+     * webelment icindeki bilgiyi siliyor
+     *
+     * @param webElement icerigi silinecek webelement
+     *                   <p>
+     *                   not: eger clear methodu calismazsa bunu kullanabilirsin
+     */
+    public static void clearWebelement(WebElement webElement) {
+        int lengthOfWeblement = webElement.getAttribute("value").length();
+
+        for (int j = 0; j < lengthOfWeblement; j++) {
+            actions.sendKeys(Keys.BACK_SPACE).perform();
+        }
+    }
+
+    public static WebElement getWebElementByUsingText(String text) {
+        return driver.findElement(By.xpath("//*[text()='" + text + "']"));
+    }
+
+    /**
+     * ne islem yapiyor
+     * girdisi nedir
+     * ciktisi nedir
+     * @param color
+     * @param webElement
+     */
+    public static void assertBackgroundColour(String color,WebElement webElement) {
+        Assert.assertEquals(color, webElement.getCssValue("background-color"));
+    }
 }
