@@ -1,6 +1,6 @@
 package pages;
 
-import com.mysql.cj.log.Log;
+
 import org.openqa.selenium.support.PageFactory;
 
 import static stepDefinitions.Hooks.driver;
