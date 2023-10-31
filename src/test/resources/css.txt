@@ -19,6 +19,10 @@ $ -> end with
 * -> contains
 [href*='/features']
 
+~ -> butun kardeslerini veriyor                 .special-label ~ input ( ~ benzerlik sembolu kullaniyoruz) tilde diye adlandirilir
++ -> alt kardeslerini veriyor                   .special-label + input
+- -> ust kardeslerini veriyor                   .special-label - input
+
 
 ve (iki farkli element)
 [href^='/features'].ant-btn                   //tag[@attr=value and @attr=value]
