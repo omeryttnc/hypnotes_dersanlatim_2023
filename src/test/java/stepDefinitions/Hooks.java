@@ -9,6 +9,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import pages.CommonPage;
+import pages.LoginPage;
 import utilities.ConfigurationReader;
 import utilities.Driver;
 
@@ -92,6 +93,13 @@ public class Hooks {
     }
 
 
+    @Before("@therapist")
+    public void loginTherapist(){
+        commonPage.getLoginPage().loginMethod(
+                ConfigurationReader.getProperty("therapistEmail"),
+                ConfigurationReader.getProperty("therapistPassword")
+        );
+    }
 
 
 
