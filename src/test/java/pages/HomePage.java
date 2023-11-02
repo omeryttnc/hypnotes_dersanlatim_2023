@@ -21,8 +21,8 @@ public class HomePage extends CommonPage {
     @FindBy(css = ".swiper-pagination-bullet")
     public List<WebElement> bulletPoints;
 
-    @FindBy(css = "div.ant-message-custom-content")
-    private WebElement alertMessage;
+    @FindBy(css = "div.ant-message-custom-content span")
+    private List<WebElement> alertMessage;
 
     @FindBy(css = "div.swiper-button-next")
     private WebElement nextButton;
@@ -41,9 +41,9 @@ public class HomePage extends CommonPage {
     }
 
     public void assertAlertMessage(String expectedAlertMessage){
-        BrowserUtilities.waitFor(5);
-        BrowserUtilities.waitForVisibility(alertMessage);
-        String actualAlertMessage = alertMessage.getText();
+
+        BrowserUtilities.waitForVisibility(alertMessage.get(1));
+        String actualAlertMessage = alertMessage.get(1).getText();
         Assert.assertEquals(expectedAlertMessage,actualAlertMessage);
     }
 }

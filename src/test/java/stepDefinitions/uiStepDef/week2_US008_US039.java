@@ -64,9 +64,9 @@ public class week2_US008_US039 extends CommonPage {
 
     @Then("user should be able to see {string} as alert message")
     public void userShouldBeAbleToSeeAsAlertMessage(String expectedAlertMessage) {
-        // getHomePage().assertAlertMessage(expectedAlertMessage);
+         getHomePage().assertAlertMessage(expectedAlertMessage);
 
-        Assert.assertTrue(getHomePage().navbarList.getFirst().isDisplayed());
+        //Assert.assertTrue(getHomePage().navbarList.getFirst().isDisplayed());
     }
 
     @Then("user should be able to see {string}")
