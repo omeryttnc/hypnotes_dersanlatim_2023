@@ -2,6 +2,7 @@ package stepDefinitions;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -30,24 +31,17 @@ public class DatatableStepDef extends CommonPage {
         }
     }
 
-    @When("user login as therapist")
-    public void userLoginAsTherapist() {
-        getHomePage().login.click();
-        BrowserUtilities.waitFor(2);
-        getLoginPage().loginEmail.click();
-        getLoginPage().loginEmail.sendKeys("test_trpst_basic@yopmail.com");
-        getLoginPage().loginPassword.sendKeys("Trpst13.");
-        BrowserUtilities.waitFor(2);
-
-        getLoginPage().loginAsClientPage_loginButton.click();
-        BrowserUtilities.waitFor(2);
+    @Given("user login as therapist with email {string} password {string}")
+    public void userLoginAsTherapistWithEmailPassword(String email, String password) {
+    getLoginPage().loginMethod(email,password);
+        BrowserUtilities.waitFor(3);
         try {
             WebElement no = driver.findElement(By.xpath("//*[text()='No']"));
             no.click();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        BrowserUtilities.waitFor(7);
+        BrowserUtilities.waitFor(3);
     }
 
     @And("user clicks Services")

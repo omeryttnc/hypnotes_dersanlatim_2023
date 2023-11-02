@@ -13,8 +13,7 @@ Feature: Datatable for list webelement
 
   @UI
   Scenario: Datatable with list-map
-    Given user goes to test page
-    When user login as therapist
+    Given user login as therapist with email "test_trpst_basic@yopmail.com" password "Trpst13."
     And user clicks Services
     And user clicks Add New Individual Session Button
     * user remaines inputs empty and verifies alert message
