@@ -14,6 +14,7 @@ public abstract class CommonPage {
     private HomePage homePage;
     private RegisterPage registerPage;
     private LoginPage loginPage;
+    private ServicesPage servicesPage;
     private ClientPage clientPage;
 
     public ClientPage getClientPage() {
@@ -42,6 +43,12 @@ public abstract class CommonPage {
             registerPage= new RegisterPage();
         }
         return registerPage;
+    }
+    public ServicesPage getServicesPage(){
+        if(servicesPage==null){
+            servicesPage= new ServicesPage();
+        }
+        return servicesPage;
     }
 
 }

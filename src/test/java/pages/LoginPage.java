@@ -14,7 +14,12 @@ public class LoginPage extends CommonPage {
     @FindBy(xpath = "//input[@data-test-id='loginAsClientPage_password']")
     public WebElement loginAsClientPage_password;
 
-
+    @FindBy(css = "[type='email']")
+    public WebElement loginEmail;
+  
+    @FindBy(css = "[type='password']")
+    public WebElement loginPassword;
+  
     public void loginMethod(String userEmail,String userPassword){
         driver.get("https://test.hypnotes.net/login");
         loginAsClientPage_email.sendKeys(userEmail);

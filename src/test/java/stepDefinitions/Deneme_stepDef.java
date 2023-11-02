@@ -6,6 +6,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
@@ -184,5 +185,9 @@ public class Deneme_stepDef {
 
         COLOR.BLACK_TEXT.assertBackgroundColor(webElement);
 
+    }
+
+    @When("user clicks language flag button user verifies that texts are changing according to the language {string}")
+    public void userClicksLanguageFlagButtonUserVerifiesThatTextsAreChangingAccordingToTheLanguage(String arg0) {
     }
 }
