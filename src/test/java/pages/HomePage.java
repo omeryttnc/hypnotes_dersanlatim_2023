@@ -26,8 +26,15 @@ public class HomePage extends CommonPage {
 
     @FindBy(css = "div.swiper-button-next")
     private WebElement nextButton;
+    @FindBy(xpath = "//span[@class='ant-select-selection-item']")
+    public WebElement languageFlagButton;
+    @FindBy(xpath = "//div[@class='style_first__DOtRH']")
+    public WebElement finallyText;
+    @FindBy(xpath = "//div[@class='ant-select-item-option-content']")
+    public List<WebElement> languageFlagList;
 
-
+    @FindBy(xpath = "//span[@data-test-id= 'loginScreen_logIn']")
+    public WebElement login;
     public void clickNextButton(){
         BrowserUtilities.scrollAndClickWebElement(nextButton);
 
