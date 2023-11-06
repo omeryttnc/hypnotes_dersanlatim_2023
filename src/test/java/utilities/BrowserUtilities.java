@@ -113,4 +113,12 @@ public class BrowserUtilities {
     public static void assertBackgroundColour(String color,WebElement webElement) {
         Assert.assertEquals(color, webElement.getCssValue("background-color"));
     }
+
+    public static String removeSpecialCharacters(String str){
+        return str;
+    }
+    public static String removeSpecialCharactersExceptFullStop(String str){
+        return str;
+    }
+
 }

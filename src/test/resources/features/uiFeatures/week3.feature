@@ -21,7 +21,7 @@ Feature: week3
     Then user should see "Warning: Deleting client data cannot be undone. All client and session data will be permanently erased. Are you sure you wish to delete?" caution message
 
     When user click on Yes button
-#    Then user should be able to see "Client has been deleted" as alert message
+   Then user should be able to see "Client has been deleted" as alert message
     And assert user is deleted
 
 
