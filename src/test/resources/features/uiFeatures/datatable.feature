@@ -17,11 +17,11 @@ Feature: Datatable for list webelement
     And user clicks Services
     And user clicks Add New Individual Session Button
     * user remaines inputs empty and verifies alert message
-      | name       | price | duration | blockBefore | blockAfter | warning                                                         |
+      | name       | price | duration | blockBefore | blockAfter | warning                    |
 #      | individual | 256   |          | 5           | 60         | Please enter Duration                                           |
 #      |            | 256   | 1        | 5           | 60         | Please enter Form Name                                          |
 #      | individual |       | 1        | 5           | 60         | Please enter Price                                              |
 #      | individual | 256   | 1        |             | 60         | Enter the amount of Buffer Time required before the appointment |
 #      | individual | 256   | 1        | 5           |            | Enter the Buffer Time after the appointment                     |
-      | individual | 256   | 1        | 5           | 60         | Service has been added                                          |
+      | individual | 256   | 1        | 5           | 60         | individual already in use! |
 
