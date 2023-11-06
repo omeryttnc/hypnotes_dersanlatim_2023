@@ -92,6 +92,9 @@ public class DatatableStepDef extends CommonPage {
             getServicesPage().blockAfterBoxIndividual.sendKeys(blockAfter);
             }
             getServicesPage().saveButtonIndividual.click();
+            if (data.get("warning").equals("Service has been added")){
+                Assert.assertTrue(getServicesPage().toastMessage.getText(),getServicesPage().toastMessage.getText().contains(data.get("warning")));
+            }
             Assert.assertTrue(getServicesPage().errorMessage.getText(), getServicesPage().errorMessage.getText().contains(data.get("warning")));
         }
     }
