@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import pages.CommonPage;
 import pages.LoginPage;
+import utilities.BrowserUtilities;
 import utilities.ConfigurationReader;
 import utilities.Driver;
 
@@ -99,6 +100,9 @@ public class Hooks {
                 ConfigurationReader.getProperty("therapistEmail"),
                 ConfigurationReader.getProperty("therapistPassword")
         );
+        BrowserUtilities.waitFor(2);
+        driver.navigate().refresh();
+        BrowserUtilities.waitFor(2);
     }
 
 

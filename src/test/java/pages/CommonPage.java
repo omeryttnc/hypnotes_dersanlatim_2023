@@ -16,6 +16,14 @@ public abstract class CommonPage {
     private LoginPage loginPage;
     private ServicesPage servicesPage;
     private ClientPage clientPage;
+    private DocumentsPage documentsPage;
+
+    public DocumentsPage getDocumentsPage() {
+        if (documentsPage == null) {
+            documentsPage=new DocumentsPage();
+        }
+        return documentsPage;
+    }
 
     public ClientPage getClientPage() {
         if (clientPage == null) {

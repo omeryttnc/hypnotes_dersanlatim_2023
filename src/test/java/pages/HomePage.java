@@ -5,12 +5,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utilities.BrowserUtilities;
+
 import java.util.List;
+
 import static stepDefinitions.Hooks.driver;
 
 public class HomePage extends CommonPage {
 
-    public List<WebElement> listTitles = driver.findElements(By.cssSelector(".features-btn"));
+   // public List<WebElement> listTitles = driver.findElements(By.cssSelector(".features-btn"));
+
+    @FindBy(css = ".features-btn")
+    public List<WebElement> listTitles;
 
     @FindBy(css = "h5[style]")
     public List<WebElement> listHeading;
@@ -21,8 +26,8 @@ public class HomePage extends CommonPage {
     @FindBy(css = ".swiper-pagination-bullet")
     public List<WebElement> bulletPoints;
 
-    @FindBy(css = "div.ant-message-custom-content span")
-    private List<WebElement> alertMessage;
+    @FindBy(css = "div.ant-message-custom-content")
+    private WebElement alertMessage;
 
     @FindBy(css = "div.swiper-button-next")
     private WebElement nextButton;
@@ -35,15 +40,19 @@ public class HomePage extends CommonPage {
 
     @FindBy(xpath = "//span[@data-test-id= 'loginScreen_logIn']")
     public WebElement login;
-    public void clickNextButton(){
-        BrowserUtilities.scrollAndClickWebElement(nextButton);
 
+    @FindBy(css = ".ant-menu-title-content a[href$='/documents']")
+    public WebElement side_documents;
+
+    public void clickNextButton() {
+        BrowserUtilities.scrollAndClickWebElement(nextButton);
     }
 
-    public void assertAlertMessage(String expectedAlertMessage){
-
-        BrowserUtilities.waitForVisibility(alertMessage.get(1));
-        String actualAlertMessage = alertMessage.get(1).getText();
-        Assert.assertEquals(expectedAlertMessage,actualAlertMessage);
+    public void assertAlertMessage(String expectedAlertMessage) {
+        System.out.println("alertMessage.getText() = " + alertMessage.getText());
+        BrowserUtilities.waitFor(1);
+        BrowserUtilities.waitForVisibility(alertMessage);
+        String actualAlertMessage = alertMessage.getText();
+        Assert.assertEquals(expectedAlertMessage, actualAlertMessage);
     }
 }
