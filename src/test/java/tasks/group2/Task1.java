@@ -1,4 +1,4 @@
-package grup2;
+package tasks.group2;
 
 import org.junit.Test;
 
