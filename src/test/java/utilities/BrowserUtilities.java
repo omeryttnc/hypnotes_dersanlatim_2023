@@ -1,6 +1,8 @@
 package utilities;
 
 
+import com.github.javafaker.Faker;
+import com.google.common.io.Files;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
 import static stepDefinitions.Hooks.actions;
@@ -121,4 +125,27 @@ public class BrowserUtilities {
         return str;
     }
 
+    public static String createFakeFile() {
+        Faker faker = new Faker();
+        String fakeFileName = faker.name().firstName() + ".pdf";
+
+        String oldFile = System.getProperty("user.dir") + "\\src\\test\\resources\\KesifPlusPdfSample.pdf";
+        String newFile = System.getProperty("user.dir") + "\\target\\" + fakeFileName;
+
+        File fileEski = new File(oldFile);
+        File fileYeni = new File(newFile);
+
+        try {
+            Files.copy(fileEski, fileYeni);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return fakeFileName;
+    }
+
+    public static String getFakeFilePath(String fileName){
+        String newFile = System.getProperty("user.dir") + "\\target\\" + fileName;
+        return newFile;
+
+    }
 }

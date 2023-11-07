@@ -48,7 +48,7 @@ Business Need: week 4
     And Save button should be visible
 
     When user clicks on save button
-#    When user should be able to see "Document Successfully uploaded. You will be redirected to the main documents page in 3 seconds." as alert message
+    When user should be able to see "Document Successfully uploaded. You will be redirected to the main documents page in 3 seconds." as alert message
 
     When user click on delete button to delete document
     And user click on Yes button

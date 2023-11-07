@@ -1,11 +1,10 @@
 package pages;
 
+import enums.COLOR;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import utilities.BrowserUtilities;
 
 import java.util.List;
-import java.util.concurrent.BrokenBarrierException;
 
 public class DocumentsPage extends CommonPage {
 
@@ -23,7 +22,7 @@ public class DocumentsPage extends CommonPage {
     @FindBy(css = ".ant-btn.css-aqx16b.ant-btn-default:not([data-test-id])")
     public WebElement selectFile_wrong;
 
-    @FindBy(css = "span input[type='file']")
+    @FindBy(css = "input[type='file']")
     public WebElement selectFile_correct;
 
     @FindBy(css = "span.ant-upload-list-item-name")
@@ -50,19 +49,15 @@ public class DocumentsPage extends CommonPage {
     @FindBy(css = "div.ant-modal-footer button:nth-last-child(1)") // nth-child(2) last-of-type
     public WebElement okButton;
 
-
     @FindBy(css = "div.ant-modal-footer button:first-of-type")
     public WebElement cancelButton;
 
+    public Double getCurrentTime() {
 
-    public String getCurrentTime() {
-        return videoPlay.getAttribute("currentTime");
+        return Double.parseDouble(videoPlay.getAttribute("currentTime"));
     }
 
     public void checkTag(int index) {
-        BrowserUtilities.waitForVisibility(upload_0$addAnnotation_1$preview_2.get(index));
-        BrowserUtilities.waitFor(1);
-        System.out.println("upload_0$addAnnotation_1$preview_2.get(index).isEnabled() = " + upload_0$addAnnotation_1$preview_2.get(index).isEnabled());
-        System.out.println("upload_0$addAnnotation_1$preview_2.get(index).getCssValue(\"background-color\") = " + upload_0$addAnnotation_1$preview_2.get(index).getCssValue("background-color"));
+        upload_0$addAnnotation_1$preview_2.get(index).assertBackgroundColor(COLOR.PROCESS_COLOR.getRGBA());
     }
 }

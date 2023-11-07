@@ -12,7 +12,10 @@ import static stepDefinitions.Hooks.driver;
 
 public class HomePage extends CommonPage {
 
-    public List<WebElement> listTitles = driver.findElements(By.cssSelector(".features-btn"));
+   // public List<WebElement> listTitles = driver.findElements(By.cssSelector(".features-btn"));
+
+    @FindBy(css = ".features-btn")
+    public List<WebElement> listTitles;
 
     @FindBy(css = "h5[style]")
     public List<WebElement> listHeading;
@@ -43,7 +46,6 @@ public class HomePage extends CommonPage {
 
     public void clickNextButton() {
         BrowserUtilities.scrollAndClickWebElement(nextButton);
-
     }
 
     public void assertAlertMessage(String expectedAlertMessage) {

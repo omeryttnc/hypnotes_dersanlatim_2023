@@ -24,6 +24,12 @@ $ -> end with
 - -> ust kardeslerini veriyor                   .special-label - input
 
 
+:not(istemedigimiz locatir i koyuyoruz)     .ant-btn.css-aqx16b.ant-btn-default:not([data-test-id])
+
+:first-of-type :first-child
+:last-of-type  :last-child
+:nth-of-type() :nth-child()
+
 ve (iki farkli element)
 [href^='/features'].ant-btn                   //tag[@attr=value and @attr=value]
 
