@@ -1,47 +1,55 @@
 package stepDefinitions.uiStepDef;
 
+import com.beust.ah.A;
+import com.github.javafaker.Faker;
+import com.google.common.io.Files;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.CommonPage;
 import utilities.BrowserUtilities;
 
-import java.time.Duration;
+import javax.sql.rowset.BaseRowSet;
 
-import static stepDefinitions.Hooks.*;
+import java.io.File;
+import java.io.IOException;
 
-public class week4 extends CommonPage {
+import static stepDefinitions.Hooks.actions;
+import static stepDefinitions.Hooks.driver;
+
+public class week4_US078 extends CommonPage {
+    String fakeFile;
     @When("user clicks on Documents on the side bar")
     public void userClicksOnDocumentsOnTheSideBar() {
-        commonPage.getHomePage().side_documents.click();
+        getHomePage().side_documents.click();
     }
 
     @Then("Add New Document should be visible")
     public void addNewDocumentShouldBeVisible() {
-        System.out.println("commonPage.getDocumentsPage().addNewDocument.isDisplayed() = " + commonPage.getDocumentsPage().addNewDocument.isDisplayed());
+        Assert.assertTrue(getDocumentsPage().addNewDocument.isDisplayed());
+//        Assert.assertEquals(getDocumentsPage().addNewDocument.getText(), "Add New Document");
     }
 
     @When("user clicks on Add New Document button")
     public void userClicksOnAddNewDocumentButton() {
-        commonPage.getDocumentsPage().addNewDocument.click();
+        getDocumentsPage().addNewDocument.click();
     }
 
     @Then("user should be on upload page")
     public void userShouldBeOnUploadPage() {
+//        BrowserUtilities.waitFor(2);
+        Assert.assertTrue(getDocumentsPage().selectFile_wrong.isDisplayed()); // selenium yavaslatmak
 
-     BrowserUtilities.waitForVisibility(getDocumentsPage().selectFile_wrong);
-System.out.println("driver.getCurrentUrl().contains(\"dashboard/documents/upload\") = " + driver.getCurrentUrl().contains("dashboard/documents/upload"));
+        Assert.assertTrue("url was : " + driver.getCurrentUrl()
+                , driver.getCurrentUrl().contains("upload"));
     }
 
     @And("cancel, upload, select file should be visible")
     public void cancelUploadSelectFileShouldBeVisible() {
-        System.out.println("getDocumentsPage().addNewDocument_cancel.isDisplayed() = " + getDocumentsPage().addNewDocument_cancel.isDisplayed());
-        System.out.println("deger 0");
-        getDocumentsPage().checkTag(0);
+        Assert.assertTrue(getDocumentsPage().selectFile_wrong.isDisplayed());
     }
 
     @When("user clicks on Cancel button")
@@ -49,32 +57,30 @@ System.out.println("driver.getCurrentUrl().contains(\"dashboard/documents/upload
         getDocumentsPage().addNewDocument_cancel.click();
     }
 
-    @Then("user should be able to upload document")
+    @When("user should be able to upload document")
     public void userShouldBeAbleToUploadDocument() {
-        commonPage.getDocumentsPage().selectFile_correct.sendKeys("C:\\Users\\HAVVA\\IdeaProjects\\KesifPlus_Hypnotes_DersAnlatim\\src\\test\\resources\\KesifPlusPdfSample.pdf");
+         fakeFile = BrowserUtilities.createFakeFile();
+        getDocumentsPage().selectFile_correct.sendKeys(BrowserUtilities.getFakeFilePath(fakeFile));
+        BrowserUtilities.waitFor(2);
     }
+
 
     @And("file Name window should be active when the file is added")
     public void fileNameWindowShouldBeActiveWhenTheFileIsAdded() {
-        BrowserUtilities.waitFor(2);
-        System.out.println("commonPage.getDocumentsPage().addedFile.getText() = " + commonPage.getDocumentsPage().addedFile.getText());
+     //   System.out.println("getDocumentsPage().addedFile.getText() = " + getDocumentsPage().addedFile.getText());
+        Assert.assertEquals(fakeFile,getDocumentsPage().addedFile.getText());
     }
 
-    @When("you click the Next button, the Add Annotation section should be visible")
-    public void youClickTheNextButtonTheAddAnnotationSectionShouldBeVisible() {
-
-
-    }
     @And("you click the Next button")
     public void youClickTheNextButton() {
-        commonPage.getDocumentsPage().nextButton.click();
+        getDocumentsPage().nextButton.click();
     }
 
     @Then("the Add Annotation section should be visible")
     public void theAddAnnotationSectionShouldBeVisible() {
-        System.out.println("deger 1");
         BrowserUtilities.waitForVisibility(getDocumentsPage().previewButton);
-        commonPage.getDocumentsPage().checkTag(1);
+        BrowserUtilities.waitFor(1);
+        getDocumentsPage().checkTag(1);
     }
 
     @When("user click on view Guide")
@@ -84,25 +90,23 @@ System.out.println("driver.getCurrentUrl().contains(\"dashboard/documents/upload
 
     @Then("OK and cancel button should be visible")
     public void okAndCancelButtonShouldBeVisible() {
-        System.out.println("getDocumentsPage().okButton.isDisplayed() = " + getDocumentsPage().okButton.isDisplayed());
-        System.out.println("getDocumentsPage().cancelButton.isDisplayed() = " + getDocumentsPage().cancelButton.isDisplayed());
+        BrowserUtilities.waitForVisibility(getDocumentsPage().okButton);
+      Assert.assertTrue(  getDocumentsPage().okButton.isDisplayed());
+      Assert.assertTrue(  getDocumentsPage().cancelButton.isDisplayed());
     }
 
     @And("video should play when click view guide")
     public void videoShouldPlayWhenClickViewGuide() {
-      //  driver.switchTo().frame(getDocumentsPage().videoFrame);
-        System.out.println("getDocumentsPage().getCurrentTime() = " + getDocumentsPage().getCurrentTime());
-//        getDocumentsPage().videoPlay.click();
-        BrowserUtilities.waitFor(3);
+        Double firstTime = getDocumentsPage().getCurrentTime();
+        Assert.assertEquals(firstTime,0,0);
         actions.sendKeys(Keys.TAB).sendKeys(Keys.SPACE).build().perform();
         BrowserUtilities.waitFor(3);
-        System.out.println("getDocumentsPage().getCurrentTime() = " + getDocumentsPage().getCurrentTime());
-    }
 
-    @And("cancel and OK buttons must be visible")
-    public void cancelAndOKButtonsMustBeVisible() {
+        Double secondTime = getDocumentsPage().getCurrentTime();
+        Assert.assertTrue(secondTime>0);
+        Assert.assertTrue(secondTime>firstTime);
 
-        System.out.println("getDocumentsPage().cancelButton.isDisplayed() = " + getDocumentsPage().cancelButton.isDisplayed());
+
     }
 
     @And("add Text Field, Add Checkbox, Add Signature Field, Add Text Input, Add Signature Input, Previus Page, Next Page, Zoom In, Zoom Out buttons should be visible")
@@ -116,7 +120,8 @@ System.out.println("driver.getCurrentUrl().contains(\"dashboard/documents/upload
 
     @Then("signature field should be able to be generated")
     public void signatureFieldShouldBeAbleToBeGenerated() {
-        System.out.println("getDocumentsPage().signatureField.isDisplayed() = " + getDocumentsPage().signatureField.isDisplayed());
+        BrowserUtilities.waitForVisibility(getDocumentsPage().signatureField);
+        Assert.assertTrue(getDocumentsPage().signatureField.isDisplayed());
     }
 
     @When("user clicks on Preview button")
@@ -124,11 +129,9 @@ System.out.println("driver.getCurrentUrl().contains(\"dashboard/documents/upload
         getDocumentsPage().previewButton.click();
     }
 
-
     @And("Save button should be visible")
     public void saveButtonShouldBeVisible() {
-        BrowserUtilities.waitForVisibility(getDocumentsPage().saveButton);
-        System.out.println("getDocumentsPage().saveButton.isDisplayed() = " + getDocumentsPage().saveButton.isDisplayed());
+       Assert.assertTrue( getDocumentsPage().saveButton.isDisplayed());
     }
 
     @When("user clicks on save button")
@@ -140,7 +143,4 @@ System.out.println("driver.getCurrentUrl().contains(\"dashboard/documents/upload
     public void userClickOnDeleteButtonToDeleteDocument() {
         getDocumentsPage().deleteVideo.click();
     }
-
-
-
 }
