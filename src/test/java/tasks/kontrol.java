@@ -31,8 +31,9 @@ public class kontrol {
 
 //        Functional
         webElementList.forEach(t -> System.out.println("t.getAttribute = " + t.getAttribute("")));
+        webElementList.stream().map(t -> t.getAttribute("")).forEach(System.out::println);
         webElementList.forEach(t -> System.out.println("t.getCssValue = " + t.getCssValue("")));
-
+       List<String> values=webElementList.stream().map(t->t.getCssValue("")).collect(Collectors.toList());
 
         // urunlerin fiyatlarini 5 ile carpin
         //Structural
@@ -41,7 +42,7 @@ public class kontrol {
         }
 
         //Functional
-        map.values().forEach(t -> System.out.println("t*5 = " + t * 5));
+        map.values().stream().map(t->t*5).forEach(System.out::println);
 
 
         //----------------------------- count -------------------------------
