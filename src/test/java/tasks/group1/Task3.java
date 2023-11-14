@@ -126,8 +126,8 @@ public class Task3 {
         doctorMuayeneUcretlerisList.stream().filter(t -> t.doctorAdi.equals(DOCTOR.POLAT) && t.hastalik.equals(HASTALIK.DIS_CEKIMI)).forEach(DoctorMuayeneUcretleri::calculateTotal);
         doctorMuayeneUcretlerisList.stream().filter(t -> t.doctorAdi.equals(DOCTOR.ELIF) && t.hastalik.equals(HASTALIK.PSIKOLOJI)).forEach(DoctorMuayeneUcretleri::calculateTotal);
         doctorMuayeneUcretlerisList.stream().filter(t -> t.doctorAdi.equals(DOCTOR.ELIF) && t.hastalik.equals(HASTALIK.PSIKOLOJI)).forEach(DoctorMuayeneUcretleri::calculateTotal);
-        int totalUcret = ders.DoctorMuayeneUcretleri.totalUcret;
-        System.out.println("totalUcret = " + totalUcret);
+       // int totalUcret = ders.DoctorMuayeneUcretleri.totalUcret;
+      //  System.out.println("totalUcret = " + totalUcret);
     }
 
     @Test

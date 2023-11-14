@@ -1,4 +1,4 @@
-package stepDefinitions;
+package stepDefinitions.uiStepDef;
 
 import enums.COLOR;
 import io.cucumber.java.en.And;
