@@ -1,14 +1,11 @@
 package pages;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utilities.BrowserUtilities;
 
 import java.util.List;
-
-import static stepDefinitions.Hooks.driver;
 
 public class HomePage extends CommonPage {
 
@@ -21,8 +18,7 @@ public class HomePage extends CommonPage {
     public List<WebElement> listHeading;
 
     @FindBy(css = "span.ant-menu-title-content")
-    public List<WebElement> navbarList;
-
+    public List<WebElement> sidebarList;
     @FindBy(css = ".swiper-pagination-bullet")
     public List<WebElement> bulletPoints;
 
