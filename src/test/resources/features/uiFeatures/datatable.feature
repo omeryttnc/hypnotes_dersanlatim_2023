@@ -23,3 +23,5 @@ Feature: Datatable for list webelement
       | individual |       | 1        | 5           | 60         | Please enter Price                                              |
       | individual | 256   | 1        |             | 60         | Enter the amount of Buffer Time required before the appointment |
       | individual | 256   | 1        | 5           |            | Enter the Buffer Time after the appointment                     |
+      | individual | 256   | 1        | 5           | 60         | individual already in use!                                      |
+

@@ -25,7 +25,8 @@ public class ServicesPage extends  CommonPage{
     @FindBy(xpath = "//*[contains(@class,'ant-tabs-tabpane-active')]//*[contains(@class,'ant-tabs-tabpane-active')]//*[text()='Add New Individual Session']")
     public WebElement addNewIndividualSession;
 
-
+    @FindBy(xpath = "//div[@class='ant-message-notice-content']")
+    public WebElement toastMessage;
 
 
 }
