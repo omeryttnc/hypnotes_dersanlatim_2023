@@ -4,6 +4,7 @@ package stepDefinitions;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.restassured.response.Response;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -19,6 +20,9 @@ public class Hooks {
     public static WebDriver driver;
     public static CommonPage commonPage;
     public static Actions actions;
+    public static Response response;
+    public static String csrfToken;
+    public static String PHPSESSID;
 
     public static boolean isHeadless = false;
     public static String browserType = "chrome";
@@ -69,13 +73,13 @@ public class Hooks {
 
     @Before("@DB")
     public void setupDatabase() {
-    //    DatabaseUtilities.createConnection();
+        //    DatabaseUtilities.createConnection();
 
     }
 
     @After("@DB")
     public void closeDatabase() {
-      //   DatabaseUtilities.closeConnection();
+        //   DatabaseUtilities.closeConnection();
 
     }
 
@@ -90,13 +94,13 @@ public class Hooks {
     }
 
     @After("@user1")
-    public void denemeLogout(){
+    public void denemeLogout() {
         System.out.println("log out");
     }
 
 
     @Before("@therapist")
-    public void loginTherapist(){
+    public void loginTherapist() {
         commonPage.getLoginPage().loginMethod(
                 ConfigurationReader.getProperty("therapistEmail"),
                 ConfigurationReader.getProperty("therapistPassword")
@@ -105,7 +109,6 @@ public class Hooks {
         driver.navigate().refresh();
         BrowserUtilities.waitFor(2);
     }
-
 
 
 }
