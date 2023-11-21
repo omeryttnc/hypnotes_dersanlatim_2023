@@ -17,8 +17,8 @@ public class US_220_221_222_223 {
     Response response200;
     Map<String, Object> payload = new HashMap<>();
     String phpSessId;
-    static int recurringBlockId;
-    static List<Integer> recurringIds = new ArrayList<>();
+    private int recurringBlockId;
+    private List<Integer> recurringIds = new ArrayList<>();
 
     @Given("user take token from api")
     public void userTakeTokenFromApi() {
