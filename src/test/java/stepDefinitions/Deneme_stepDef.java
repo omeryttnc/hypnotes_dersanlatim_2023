@@ -162,8 +162,8 @@ public class Deneme_stepDef {
         System.out.println("classPerson.getEmail() = " + classPerson.getEmail());
 
         // enum kullanimi
-        System.out.println("USER_INFO.ALICI.getName() = " + USER_INFO.ALICI.getName());
-        USER_INFO.SATICI.login();
+        System.out.println("USER_INFO.ALICI.getName() = " + USER_INFO.ALICI.getEmail());
+       /// USER_INFO.SATICI.login();
 
         USER_INFO[] values = USER_INFO.values(); // ctrl alt v return e gore bize bir obje olusturuyor
 
