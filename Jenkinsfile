@@ -5,13 +5,7 @@ pipeline {
   tools {nodejs "20.6.1"}
 
   stages {
-    stage('Install Postman CLI') {
-      steps {
-          bat 'npm install -g newman'
-          bat 'npm i -g newman-reporter-htmlextra'
-        bat 'powershell.exe -NoProfile -InputFormat None -ExecutionPolicy AllSigned -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString(\'https://dl-cli.pstmn.io/install/win64.ps1\'))"'
-      }
-    }
+
 
     stage('Postman CLI Login') {
       steps {
