@@ -35,6 +35,10 @@ public class ClientPage extends CommonPage {
 
     @FindBy(css = "div.ant-card-bordered")
     public List<WebElement> clientsInfoList;
+    @FindBy(xpath = "//h5")
+    public List<WebElement> clientNameList;
+    @FindBy(xpath = "//strong[text()='Email']/parent::span/parent::div//span[contains(@class,'ant-typography-secondary')]")
+    public List<WebElement> clientEmailList;
 
     @FindBy(css = "[data-test-id='delet_button_clientsPage']")
     public List<WebElement> deleteButton;
