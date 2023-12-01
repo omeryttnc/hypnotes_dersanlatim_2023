@@ -18,5 +18,14 @@ pipeline {
         bat 'newman run "https://api.getpostman.com/collections/11910468-b34b376d-3830-4708-86d2-c2497e0d847d?apikey=PMAK-656a2a5afc60c0003135be75-826634f810fb96ceec478e5ae0b3480f3f" --environment "https://api.getpostman.com/environments/11910468-0a4b96cc-63ae-4dec-a32f-17510bbd05ce?apikey=PMAK-656a2a5afc60c0003135be75-826634f810fb96ceec478e5ae0b3480f3f" -d "src/test/resources/postmanResource/userInfo.json" -r htmlextra --reporter-htmlextra-export "target/reports/postman.html"'
       }
     }
+
+
   }
+
+  post {
+          always {
+             emailext attachmentsPattern: 'target/reports/postman.html', body: '', subject: 'postman rapor', to: 'omeryttnc@gmail.com'
+          }
+
+      }
 }
