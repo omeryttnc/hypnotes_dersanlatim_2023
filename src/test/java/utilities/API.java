@@ -13,6 +13,7 @@ import static stepDefinitions.Hooks.response;
 
 public class API {
     private CLIENTS_API clientsApi;
+    private LOCATION_API locationApi;
 
 
     public CLIENTS_API getClientsApi() {
@@ -21,6 +22,14 @@ public class API {
         }
         return clientsApi;
     }
+
+    public LOCATION_API getLocationApi() {
+        if (locationApi == null) {
+            locationApi = new LOCATION_API();
+        }
+        return locationApi;
+    }
+
 
     public API(USER_INFO userInfo) {
         RestAssured.baseURI = "https://" + (userInfo.isTestEnvironment() ? "test." : "") + "hypnotes.net";

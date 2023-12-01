@@ -69,6 +69,25 @@ public class CLIENTS_API {
         );
 
     }
+ public PGetClientInfo getClient() {
+        API api = new API(USER_INFO.THERAPIST);
+
+        response = given()
+                .header("cookie", "PHPSESSID=" + PHPSESSID)
+                .post("/dashboard/getClientBasicInfo");
+        JsonPath jsonPath = response.jsonPath();
+
+        return new PGetClientInfo(
+                jsonPath.getBoolean("success"),
+                jsonPath.getList("ClientInfo.clientId"),
+                jsonPath.getList("ClientInfo.clientInfosName"),
+                jsonPath.getList("ClientInfo.clientInfosSurname"),
+                jsonPath.getList("ClientInfo.clientInfosEmail"),
+
+                response.statusCode()
+        );
+
+    }
 
     // Hamcrest Matchers kullanarak delete yapildi
     public void deleteClient(int clientId) {
@@ -87,7 +106,12 @@ public class CLIENTS_API {
                 .header("content-type","application/json");
     }
 
+
+
     public record PCreateClientInfo(boolean isSuccessTrue, int createdClientId, String email, List<String> clientsRole,
                                     int statusCode) {
+    }
+    public record PGetClientInfo(boolean isSuccessTrue, List<Integer> createdClientIdList, List<String> clientNameList,
+                                 List<String> clientSurnameList, List<String> clientEmailList, int statusCode) {
     }
 }
