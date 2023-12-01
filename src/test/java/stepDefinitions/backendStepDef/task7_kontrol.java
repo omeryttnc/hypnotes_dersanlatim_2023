@@ -32,11 +32,6 @@ public class task7_kontrol extends CommonPage {
         lastName = faker.name().lastName();
         email = faker.internet().emailAddress();
 
-        BrowserUtilities.waitFor(5);
-        getClientPage().clients_sideBar.click();
-
-        getClientPage().addNewClient.click();
-
         getClientPage().register_firstName.sendKeys(firstName);
         getClientPage().register_lastName.sendKeys(lastName);
         getClientPage().register_email.sendKeys(email);
@@ -71,8 +66,6 @@ public class task7_kontrol extends CommonPage {
 
     @And("user deletes added client from UI")
     public void userDeletesAddedClientFromUI() {
-        BrowserUtilities.waitFor(5);
-        getClientPage().clients_sideBar.click();
 
         int clientSize = getClientPage().getClientSize();
 

@@ -12,15 +12,19 @@
   Feature: task 7
     Background:
       Given refresh page
+      And user clicks on Clients Page
+      When user click on Add New Client button
 
     Scenario: Task 7 add client
       Given user adds a client from UI
       When user sends a request for getting all clients
       Then user verifies that created client is exist in response
+      When user clicks on Clients Page
       And user deletes added client from UI
 
     Scenario: Task 7 delete client
       Given user adds a client from UI
+      When user clicks on Clients Page
       And user deletes added client from UI
       When user sends a request for getting all clients
       Then user verifies that deleted client is not exist in response
