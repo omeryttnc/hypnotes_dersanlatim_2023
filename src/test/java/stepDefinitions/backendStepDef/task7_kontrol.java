@@ -13,6 +13,7 @@ import utilities.API;
 import utilities.BrowserUtilities;
 import utilities.CLIENTS_API;
 
+import java.util.AbstractMap;
 import java.util.stream.IntStream;
 
 import static io.restassured.RestAssured.given;
@@ -75,14 +76,28 @@ public class task7_kontrol extends CommonPage {
 
         int clientSize = getClientPage().getClientSize();
 
-        for (int i = 0; i < clientSize; i++) {
-            ClientPage.ClientInfo clientInfo=getClientPage().getClientInfo(i);
+//        //way 1 Structural
+//        for (int i = 0; i < clientSize; i++) {
+//            ClientPage.ClientInfo clientInfo=getClientPage().getClientInfo(i);
+//
+//            if (clientInfo.clientName().equals(firstName) || clientInfo.clientEmail().equals(email)) {
+//                getClientPage().deleteButton.get(i).click();
+//                break;
+//            }
+//        }
 
-            if (clientInfo.clientName().equals(firstName) || clientInfo.clientEmail().equals(email)) {
-                getClientPage().deleteButton.get(i).click();
-                break;
-            }
-        }
+        //way 2 Functional
+        IntStream.range(0, clientSize)
+                .mapToObj(i -> {
+                    ClientPage.ClientInfo clientInfo = getClientPage().getClientInfo(i);
+                    return new AbstractMap.SimpleEntry<>(i, clientInfo);
+                })
+                .filter(entry -> entry.getValue().clientName().equals(firstName) || entry.getValue().clientEmail().equals(email))
+                .findFirst()
+                .ifPresent(entry -> {
+                    int i = entry.getKey();
+                    getClientPage().deleteButton.get(i).click();
+                });
 
         "Yes".clickWebElementByText();
     }
