@@ -86,7 +86,6 @@ public class CLIENTS_API {
 
                 response.statusCode()
         );
-
     }
 
     // Hamcrest Matchers kullanarak delete yapildi
@@ -105,8 +104,6 @@ public class CLIENTS_API {
                 .body("descr",Matchers.equalTo("Client deleted"))
                 .header("content-type","application/json");
     }
-
-
 
     public record PCreateClientInfo(boolean isSuccessTrue, int createdClientId, String email, List<String> clientsRole,
                                     int statusCode) {
