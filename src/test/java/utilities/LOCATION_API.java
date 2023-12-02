@@ -21,7 +21,6 @@ public int addLocation(String addressTitle,String address, String zipcode, Strin
             .formParams(requestBody)
             .post("https://test.hypnotes.net/api/settings/location/add");
 
-    response.prettyPrint();
 return locationId = response.jsonPath().getInt("locationInfo.id");
 }
 
@@ -36,7 +35,6 @@ public void deleteLocation(int locationId){
             .formParams(requestBody)
             .post("https://test.hypnotes.net/api/settings/location/delete");
 
-    response.prettyPrint();
 }
 
 public void getLocation(){
@@ -44,7 +42,6 @@ public void getLocation(){
             .header("cookie","PHPSESSID="+PHPSESSID)
             .post("https://test.hypnotes.net/api/dashboard/getUser");
 
-    response.prettyPrint();
 }
 
 public void updateLocation(int locationId,String updatedAddressTitle, String updatedAddress,String updatedZipcode){
@@ -61,6 +58,5 @@ public void updateLocation(int locationId,String updatedAddressTitle, String upd
             .formParams(requestBody)
             .post("https://test.hypnotes.net/api/settings/location/update");
 
-    response.prettyPrint();
 }
 }
