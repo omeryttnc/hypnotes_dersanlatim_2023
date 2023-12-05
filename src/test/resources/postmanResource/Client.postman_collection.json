@@ -1,0 +1,557 @@
+{
+	"info": {
+		"_postman_id": "b34b376d-3830-4708-86d2-c2497e0d847d",
+		"name": "Client",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11910468"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const PHPSESSID= pm.cookies.get(\"PHPSESSID\")\r",
+							"\r",
+							"//console.log(PHPSESSID)\r",
+							"\r",
+							"pm.environment.set(\"PHPSESSID\", \"PHPSESSID=\"+PHPSESSID);\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"authenticated\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"is verified\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.isVerified).to.eql(true); // chai assertion\r",
+							" //   Assert.assertEqual(\"expected\",\"actual\")\r",
+							"});\r",
+							"\r",
+							"// pm.test(\"Body is correct\", function () {\r",
+							"//   const expectedResponse={\r",
+							"//     \"authenticated\": true,\r",
+							"//     \"type\": \"therapist\",\r",
+							"//     \"isVerified\": true,\r",
+							"//     \"timeZone\": \"Europe/London\"\r",
+							"// }\r",
+							"//     pm.response.to.have.body(expectedResponse);\r",
+							"// });\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202,200]);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authority",
+						"value": "test.hypnotes.net"
+					},
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-GB,en-US;q=0.9,en;q=0.8,tr;q=0.7"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "cookie",
+						"value": "_fbp=fb.1.1700158322717.1153043622; _gcl_au=1.1.1739464723.1700158329; _ga=GA1.1.743882856.1700158330; _ga=GA1.3.743882856.1700158330; _gid=GA1.3.2078723063.1701129409; _gat_UA-203752337-1=1; _ga_TMNT8VC3SD=GS1.1.1701201766.12.1.1701201771.55.0.0"
+					},
+					{
+						"key": "origin",
+						"value": "https://test.hypnotes.net"
+					},
+					{
+						"key": "referer",
+						"value": "https://test.hypnotes.net/login"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"{{email}}\",\"password\":\"{{password}}\"}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}{{basePath}}/login",
+					"host": [
+						"{{baseUrl}}{{basePath}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addClient",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const createdClientEmail= pm.variables.replaceIn('{{$randomEmail}}')\r",
+							"\r",
+							"pm.collectionVariables.set(\"createdClientEmail\", createdClientEmail);\r",
+							"\r",
+							"console.warn(createdClientEmail)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.success).true;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"var response = pm.response.json()\r",
+							"\r",
+							"const createdClientID= response.client.id\r",
+							"\r",
+							"pm.collectionVariables.set(\"createdClientID\", createdClientID);\r",
+							"\r",
+							"\r",
+							"\r",
+							"const expectedUserEmail = pm.collectionVariables.get(\"createdClientEmail\");\r",
+							"const actualUserEmail = response.client.email\r",
+							"\r",
+							"pm.test('gonderilen email gelenle ayni mi',()=>{\r",
+							"\r",
+							"pm.expect(expectedUserEmail).to.equal(actualUserEmail)\r",
+							"\r",
+							"\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authority",
+						"value": "test.hypnotes.net"
+					},
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-GB,en-US;q=0.9,en;q=0.8,tr;q=0.7"
+					},
+					{
+						"key": "cookie",
+						"value": "{{PHPSESSID}}"
+					},
+					{
+						"key": "origin",
+						"value": "https://test.hypnotes.net"
+					},
+					{
+						"key": "referer",
+						"value": "https://test.hypnotes.net/dashboard/add-client"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "firstName",
+							"value": "{{$randomFirstName}}",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "{{$randomLastName}}",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "{{createdClientEmail}}",
+							"type": "text"
+						},
+						{
+							"key": "timezone",
+							"value": "Europe/London",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}{{basePath}}/dashboard/client/add",
+					"host": [
+						"{{baseUrl}}{{basePath}}"
+					],
+					"path": [
+						"dashboard",
+						"client",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "allClientInfo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.success).true;\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json()\r",
+							"\r",
+							"const allClientsId= []\r",
+							"\r",
+							"const allClient= response.ClientInfo\r",
+							"\r",
+							"// console.warn(allClient.length)\r",
+							"\r",
+							"\r",
+							"for (let i=0;i<allClient.length;i++){\r",
+							"allClientsId.push( allClient[i].clientId)\r",
+							"\r",
+							"}\r",
+							"\r",
+							"//console.log(allClientsId)\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test('yeni olusturulan kullanici genel list de var mi',()=>{\r",
+							"pm.expect(allClientsId).includes(pm.collectionVariables.get('createdClientID'))\r",
+							"\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authority",
+						"value": "test.hypnotes.net"
+					},
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-GB,en-US;q=0.9,en;q=0.8,tr;q=0.7"
+					},
+					{
+						"key": "content-length",
+						"value": "0"
+					},
+					{
+						"key": "cookie",
+						"value": "{{PHPSESSID}}"
+					},
+					{
+						"key": "origin",
+						"value": "https://test.hypnotes.net"
+					},
+					{
+						"key": "referer",
+						"value": "https://test.hypnotes.net/dashboard/clients"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}{{basePath}}/dashboard/getClientBasicInfo",
+					"host": [
+						"{{baseUrl}}{{basePath}}"
+					],
+					"path": [
+						"dashboard",
+						"getClientBasicInfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteClient",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"is success\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.success).true;\r",
+							"});\r",
+							"pm.test(\"client is not deleted\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.descr).to.eql(\"Client deleted\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authority",
+						"value": "test.hypnotes.net"
+					},
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "accept-language",
+						"value": "en-GB,en-US;q=0.9,en;q=0.8,tr;q=0.7"
+					},
+					{
+						"key": "cookie",
+						"value": "{{PHPSESSID}}"
+					},
+					{
+						"key": "origin",
+						"value": "https://test.hypnotes.net"
+					},
+					{
+						"key": "referer",
+						"value": "https://test.hypnotes.net/dashboard/clients"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "clientId",
+							"value": "{{createdClientID}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test.hypnotes.net/api/dashboard/client/delete",
+					"protocol": "https",
+					"host": [
+						"test",
+						"hypnotes",
+						"net"
+					],
+					"path": [
+						"api",
+						"dashboard",
+						"client",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"",
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					"",
+					"pm.test(\"Content-Type is present\", function () {",
+					"    pm.response.to.have.header(\"Content-Type\");",
+					"});",
+					"",
+					"pm.test(\"Response time is less than 500ms\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(500);",
+					"});",
+					"",
+					"pm.test(\"Status code name has string\", function () {",
+					"    pm.response.to.have.status(\"OK\");",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "createdClientEmail",
+			"value": ""
+		},
+		{
+			"key": "createdClientID",
+			"value": ""
+		}
+	]
+}

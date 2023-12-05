@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import pages.CommonPage;
 import pages.LoginPage;
+import stepDefinitions.databaseStepDef.DatabaseMysql;
 import utilities.BrowserUtilities;
 import utilities.ConfigurationReader;
 import utilities.Driver;
@@ -58,7 +59,7 @@ public class Hooks {
         commonPage = new CommonPage() {
         };
         actions = new Actions(driver);
-        faker=new Faker();
+        faker = new Faker();
     }
 
     @After(value = "@UI")
@@ -76,14 +77,15 @@ public class Hooks {
 
     @Before("@DB")
     public void setupDatabase() {
-        //    DatabaseUtilities.createConnection();
+        DatabaseMysql databaseMysql = new DatabaseMysql();
+        databaseMysql.getConnection();
 
     }
 
     @After("@DB")
     public void closeDatabase() {
-        //   DatabaseUtilities.closeConnection();
-
+        DatabaseMysql databaseMysql = new DatabaseMysql();
+        databaseMysql.tearDatabase();
     }
 
     @Before("@user1")

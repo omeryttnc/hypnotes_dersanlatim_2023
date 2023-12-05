@@ -1,0 +1,37 @@
+const -> javadaki final gibi calisir bir deger assign edersek geri degistiremeyiz
+let   -> daha esnektir assign edilen degeri tekrar degistirebiliriz
+
+postman cli kurduktan sonra 
+postman den token olusturduk -> PMAK-656a2a5afc60c0003135be75-826634f810fb96ceec478e5ae0b3480f3f
+
+postman login --with-api-key PMAK-656a2a5afc60c0003135be75-826634f810fb96ceec478e5ae0b3480f3f  -> token kullanarak cloud postman hesabimiza giris yaptik
+postman collection run 11910468-b34b376d-3830-4708-86d2-c2497e0d847d -e 11910468-0a4b96cc-63ae-4dec-a32f-17510bbd05ce
+
+client collection id   -> 11910468-b34b376d-3830-4708-86d2-c2497e0d847d
+HypnotesEnvironment id -> 11910468-0a4b96cc-63ae-4dec-a32f-17510bbd05ce
+
+newman kurulumu 
+
+kurulum yapmadan once nodeJs i kurmamiz gerekiyor 
+node --version -> bilgisayirimizda nodejs var mi diye bakiyoruz
+nodejs kurulumu -> https://nodejs.org/en/download
+newman kurulumu -> npm install -g newman
+newman html rapor kurulumu -> npm i -g newman-reporter-html
+newman htmlextra rapor kurulumu ->  npm i -g newman-reporter-htmlextra
+
+newman calistirma 1 -> newman run "Client.postman_collection.json" -e "HypnotesEnvironment.postman_environment.json"
+
+keyword 
+-e 				-> kullandigimiz environment
+-d              		-> disardan data cekmemizi sagliyor
+-r              		-> rapor turunu belirtecegim
+--reporter-htmlextra-export 	-> rapor cikrtacagimiz yeri belirtiyoruz html extra icin
+--reporter-html-export 		-> rapor cikrtacagimiz yeri belirtiyoruz html icin
+
+newman genel calistirma
+
+newman run "https://api.getpostman.com/collections/11910468-b34b376d-3830-4708-86d2-c2497e0d847d?apikey=PMAK-656a2a5afc60c0003135be75-826634f810fb96ceec478e5ae0b3480f3f" --environment "https://api.getpostman.com/environments/11910468-0a4b96cc-63ae-4dec-a32f-17510bbd05ce?apikey=PMAK-656a2a5afc60c0003135be75-826634f810fb96ceec478e5ae0b3480f3f" -d "userInfo.json"
+
+
+newman run "https://api.getpostman.com/collections/11910468-b34b376d-3830-4708-86d2-c2497e0d847d?apikey=PMAK-656a37dcf3835d0efd2c9847-b742c87ca4bb2db20d73b986277e37dbf7" --environment "https://api.getpostman.com/environments/11910468-0a4b96cc-63ae-4dec-a32f-17510bbd05ce?apikey=PMAK-656a37dcf3835d0efd2c9847-b742c87ca4bb2db20d73b986277e37dbf7" -d "userInfo.json" -r html 
+
