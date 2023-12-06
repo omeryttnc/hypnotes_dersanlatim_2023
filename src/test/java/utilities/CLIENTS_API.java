@@ -59,13 +59,14 @@ public class CLIENTS_API {
                 .formParams(mapBody)
                 .post("/dashboard/client/add");
         JsonPath jsonPath = response.jsonPath();
-
+response.prettyPrint();
         return new PCreateClientInfo(
                 jsonPath.getBoolean("success"),
                 jsonPath.getInt("client.id"),
                 jsonPath.getString("client.email"),
                 jsonPath.getList("client.roles"),
-                response.statusCode()
+                response.statusCode(),
+                jsonPath.getString("client.name")
         );
 
     }
@@ -106,7 +107,7 @@ public class CLIENTS_API {
     }
 
     public record PCreateClientInfo(boolean isSuccessTrue, int createdClientId, String email, List<String> clientsRole,
-                                    int statusCode) {
+                                    int statusCode,String firstName) {
     }
     public record PGetClientInfo(boolean isSuccessTrue, List<Integer> createdClientIdList, List<String> clientNameList,
                                  List<String> clientSurnameList, List<String> clientEmailList, int statusCode) {

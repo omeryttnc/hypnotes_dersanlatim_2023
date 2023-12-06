@@ -1,0 +1,17 @@
+postman cli kurulumu 
+https://learning.postman.com/docs/postman-cli/postman-cli-installation/#windows-installation
+
+newman collection ve environment id kullanarak calistirma 
+https://learning.postman.com/docs/collections/using-newman-cli/continuous-integration/
+
+15 days postman tester challenge 
+https://www.postman.com/postman/workspace/15-days-of-postman-for-testers/collection/1559645-032fb22a-9afb-4c56-b8f0-4042db96a4f3
+
+postman dynamic variable
+https://learning.postman.com/docs/writing-scripts/script-references/variables-list/
+
+postman variable turleri 
+https://learning.postman.com/docs/sending-requests/variables/
+
+postman echo end point
+https://learning.postman.com/docs/developer/echo-api/

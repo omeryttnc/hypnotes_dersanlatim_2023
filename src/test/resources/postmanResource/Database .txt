@@ -1,0 +1,17 @@
+CRUD      
+Create   executeUpdate
+Update
+Delete
+
+Read    executeQuery 
+
+insert into tableName columnName VALUES (girecegimiz degerler)  ->  kac tane row degisti  -> insert into Users (userId,email,userName,lastName) values (null,'omer2@gmail.com','omer','ali')
+											     insert into Users values (null,'omer2@gmail.com','omer','ali')
+											     insert into Users (userId,email) values (null,'omer6@gmail.com')
+update tableName set key1=value1 where condition                ->  kac tane row degisti  -> update Users set userName='kesif' where userId=4
+delete from tableName where condition                           ->  kac tane row degisti  -> delete from Users where userId=4
+select * from tableName						->  table daki bilgileri  -> select * from Users
+
+limit 1 		-> en ustteki kullaniciyi getirdi
+order by columnName 	-> column name a gore siralama yapmis oluyoruz 
+desc  			-> desc eklersek buyuk kucuge dogru siralamis oluyoruz -> select email from Users order by userId desc limit 1 
