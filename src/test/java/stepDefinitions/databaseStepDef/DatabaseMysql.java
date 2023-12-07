@@ -27,6 +27,17 @@ public class DatabaseMysql extends TestCase {
             throw new RuntimeException(e);
         }
     }
+    public static ResultSet executeQuery(String sql) {
+
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return resultSet;
+    }
+
 
     public void tearDatabase() {
         try {

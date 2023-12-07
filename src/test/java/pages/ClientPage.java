@@ -44,6 +44,32 @@ public class ClientPage extends CommonPage {
     public List<WebElement> deleteButton;
 
 
+
+
+    @FindBy(xpath = "//*[text()='Settings']")
+    public WebElement settingButton;
+    @FindBy(xpath = "//*[text()='Locations']")
+    public WebElement locationButton;
+    @FindBy(xpath = "//*[text()='Add New Location']")
+    public WebElement addNewLocationTitle;
+    @FindBy(id = "form_in_modal_addressTitle")
+    public WebElement addressTitleBox;
+
+    @FindBy(id = "form_in_modal_address")
+    public WebElement addressBox;
+
+    @FindBy(id = "form_in_modal_zipCode")
+    public WebElement zipCodeBox;
+    @FindBy(xpath = "//div[@class='ant-modal-footer']//span[contains(text(),'Save')]")
+    public WebElement saveButtonOnLocation;
+
+    @FindBy(css = "[data-icon='delete']")
+    public List<WebElement> locations_delete;
+    @FindBy(xpath = "//button/span[text()='OK']")
+    public WebElement Ok;
+
+
+
     public ClientInfo getClientInfo(int index) { // chain locator
         BrowserUtilities.waitFor(2);
         String clientName = clientsInfoList.get(index).findElement(By.cssSelector("h5")).getText();
