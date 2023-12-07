@@ -13,7 +13,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 
 import static stepDefinitions.Hooks.actions;
 import static stepDefinitions.Hooks.driver;
@@ -147,5 +149,17 @@ public class BrowserUtilities {
         String newFile = System.getProperty("user.dir") + "\\target\\" + fileName;
         return newFile;
 
+    }
+    public static boolean isDateFuture(String date) {
+        boolean flag = false;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+
+            flag = simpleDateFormat.parse(date).compareTo(new Date()) < 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
     }
 }

@@ -6,7 +6,9 @@ import utilities.API;
 import utilities.CLIENTS_API;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DatabaseMysql extends TestCase {
@@ -27,6 +29,7 @@ public class DatabaseMysql extends TestCase {
             throw new RuntimeException(e);
         }
     }
+
     public static ResultSet executeQuery(String sql) {
 
         try {
@@ -112,12 +115,45 @@ public class DatabaseMysql extends TestCase {
         return map;
     }
 
-    public record CreatedClient(int userID, String userEmail, String firstName, String lastName) { }
+    public List<CreatedClientDB> getAllClientsInfoFromDb() {
+        List<CreatedClientDB> allClientsInfo = new ArrayList<>();
+        getConnection();
+        CreatedClientDB client = null;
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("select  * from `client`");
+            while (resultSet.next()) {
+                client = new CreatedClientDB(
+                        resultSet.getInt("id"),
+                        resultSet.getString("email"),
+                        List.of(resultSet.getString("roles").replaceAll("[\\[\\]\"]", "").split(",")),
+                        resultSet.getString("created"),
+                        resultSet.getString("password"),
+                        resultSet.getString("facebook_id"),
+                        resultSet.getString("google_id"),
+                        resultSet.getString("linkedin_id"));
+
+                allClientsInfo.add(client);
+            }
+
+            return allClientsInfo;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public record CreatedClient(int userID, String userEmail, String firstName, String lastName) {
+    }
+
+    public record CreatedClientDB(int userID, String userEmail, List<String> roles, String createdDate,
+                                 String password, String facebook_id, String google_id, String linkedin_id) {
+    }
 
 
     public class CreatedClient_CLass {
         private int userID;
-        private String userEmail,firstName,lastName;
+        private String userEmail, firstName, lastName;
 
         public CreatedClient_CLass(int userID, String userEmail, String firstName, String lastName) {
             this.userID = userID;
