@@ -15,6 +15,7 @@ import pages.LoginPage;
 import stepDefinitions.databaseStepDef.DatabaseMysql;
 import utilities.BrowserUtilities;
 import utilities.ConfigurationReader;
+import utilities.DatabaseUtilities;
 import utilities.Driver;
 
 
@@ -77,15 +78,13 @@ public class Hooks {
 
     @Before("@DB")
     public void setupDatabase() {
-        DatabaseMysql databaseMysql = new DatabaseMysql();
-        databaseMysql.getConnection();
+       DatabaseUtilities.getConnection();
 
     }
 
     @After("@DB")
     public void closeDatabase() {
-        DatabaseMysql databaseMysql = new DatabaseMysql();
-        databaseMysql.tearDatabase();
+        DatabaseUtilities.tearDatabase();
     }
 
     @Before("@user1")
