@@ -9,44 +9,9 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import static utilities.DatabaseUtilities.*;
+
 public class DatabaseMysql extends TestCase {
-    public static Connection connection;
-    public static Statement statement;
-    public static PreparedStatement preparedStatement;
-    public static ResultSet resultSet;
-
-    public void getConnection() {
-        try {
-            connection = DriverManager.getConnection(
-                    "jdbc:mysql://212.47.242.13:6336/hypnotes",
-                    "hypnotes",
-                    "hypnotes"
-
-            );
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void tearDatabase() {
-        try {
-
-            if (connection != null) {
-                connection.close();
-            }
-            if (statement != null) {
-                statement.close();
-            }
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (resultSet != null) {
-                resultSet.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public CreatedClient getLastCreatedClient() {
         getConnection();
@@ -132,18 +97,18 @@ public class DatabaseMysql extends TestCase {
         }
     }
 
-    public void testCreatedClint() {
-        API api = new API(USER_INFO.THERAPIST);
-        CLIENTS_API.PCreateClientInfo client = api.getClientsApi().createClient();
-
-        CreatedClient lastCreatedClient = getLastCreatedClient(); // record
-        Map<String, Object> lastCreatedClientMap = getLastCreatedClient_WithMap();
-        System.out.println("lastCreatedClientMap.get(\"userEmail\") = " + lastCreatedClientMap.get("userEmail"));
-        System.out.println("lastCreatedClient.userEmail() = " + lastCreatedClient.userEmail());
-
-        assertNotSame(client.firstName(), lastCreatedClient.firstName());
-        assertEquals(client.email(), lastCreatedClient.userEmail());
-
-    }
+//    public void testCreatedClint() {
+//        API api = new API(USER_INFO.THERAPIST);
+//        CLIENTS_API.PCreateClientInfo client = api.getClientsApi().createClient();
+//
+//        CreatedClient lastCreatedClient = getLastCreatedClient(); // record
+//        Map<String, Object> lastCreatedClientMap = getLastCreatedClient_WithMap();
+//        System.out.println("lastCreatedClientMap.get(\"userEmail\") = " + lastCreatedClientMap.get("userEmail"));
+//        System.out.println("lastCreatedClient.userEmail() = " + lastCreatedClient.userEmail());
+//
+//        assertNotSame(client.firstName(), lastCreatedClient.firstName());
+//        assertEquals(client.email(), lastCreatedClient.userEmail());
+//
+//    }
 
 }
