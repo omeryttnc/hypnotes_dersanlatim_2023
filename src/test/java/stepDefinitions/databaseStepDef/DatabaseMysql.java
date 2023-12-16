@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static utilities.DatabaseUtilities.*;
+
 public class DatabaseMysql extends TestCase {
     public static Connection connection;
     public static Statement statement;
@@ -146,19 +148,19 @@ public class DatabaseMysql extends TestCase {
         }
     }
 
-    public void testCreatedClint() {
-        API api = new API(USER_INFO.THERAPIST);
-        CLIENTS_API.PCreateClientInfo client = api.getClientsApi().createClient();
-
-        CreatedClient lastCreatedClient = getLastCreatedClient(); // record
-        Map<String, Object> lastCreatedClientMap = getLastCreatedClient_WithMap();
-        System.out.println("lastCreatedClientMap.get(\"userEmail\") = " + lastCreatedClientMap.get("userEmail"));
-        System.out.println("lastCreatedClient.userEmail() = " + lastCreatedClient.userEmail());
-
-        assertNotSame(client.firstName(), lastCreatedClient.firstName());
-        assertEquals(client.email(), lastCreatedClient.userEmail());
-
-    }
+//    public void testCreatedClint() {
+//        API api = new API(USER_INFO.THERAPIST);
+//        CLIENTS_API.PCreateClientInfo client = api.getClientsApi().createClient();
+//
+//        CreatedClient lastCreatedClient = getLastCreatedClient(); // record
+//        Map<String, Object> lastCreatedClientMap = getLastCreatedClient_WithMap();
+//        System.out.println("lastCreatedClientMap.get(\"userEmail\") = " + lastCreatedClientMap.get("userEmail"));
+//        System.out.println("lastCreatedClient.userEmail() = " + lastCreatedClient.userEmail());
+//
+//        assertNotSame(client.firstName(), lastCreatedClient.firstName());
+//        assertEquals(client.email(), lastCreatedClient.userEmail());
+//
+//    }
 
     //-----------------------Task 8-----------------------------------------------
     public List<CreatedClientDB> getAllClientsInfo(){

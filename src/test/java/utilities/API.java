@@ -14,7 +14,14 @@ import static stepDefinitions.Hooks.response;
 public class API {
     private CLIENTS_API clientsApi;
     private LOCATION_API locationApi;
+    private USER_API userApi;
 
+    public USER_API getUserApi() {
+        if (userApi == null) {
+            userApi= new USER_API();
+        }
+        return userApi;
+    }
 
     public CLIENTS_API getClientsApi() {
         if (clientsApi == null) {
@@ -45,5 +52,10 @@ public class API {
 
         PHPSESSID = response.cookies().get("PHPSESSID");
         csrfToken = response.cookies().get("csrfToken");
+    }
+
+    public API(boolean isTestEnvironment) {
+        RestAssured.baseURI = "https://" + (isTestEnvironment ? "test." : "") + "hypnotes.net";
+        RestAssured.basePath = "/api";
     }
 }
