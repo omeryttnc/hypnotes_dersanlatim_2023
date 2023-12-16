@@ -4,6 +4,7 @@ import enums.ROLE;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import utilities.BrowserUtilities;
 
 import java.util.List;
 
@@ -28,11 +29,12 @@ public class task8 {
 
     @Then("user verifies there is password if role_client_verify is exist")
     public void userVerifiesThereIsPasswordIfRole_client_verifyIsExist() {
-        clientsInfo.stream().filter(t->t.role().contains(ROLE.ROLE_Client_Verified)).forEach(t->Assert.assertNotNull(t.password()));
+        clientsInfo.stream().filter(t->t.role().contains(ROLE.ROLE_Client_Verified.getRole())).forEach(t->Assert.assertNotNull(t.password()));
     }
 
     @Then("user verifies created date is past")
     public void userVerifiesCreatedDateIsPast() {
+        Assert.assertTrue(clientsInfo.stream().allMatch(t-> BrowserUtilities.isDatePast(t.createdDate())));
     }
 
     @Then("user gets number of google, Linkedin, facebook accounts")
@@ -48,8 +50,9 @@ public class task8 {
 
     @Then("user verifies there is role_client_verify when google_id - Linkedin_id - facebook_id is exist")
     public void userVerifiesThereIsRole_client_verifyWhenGoogle_idLinkedin_idFacebook_idIsExist() {
-        clientsInfo.stream().filter(t->t.google_id()!=null).forEach(t->Assert.assertNotNull(t.role().contains(ROLE.ROLE_Client_Verified)));
-        clientsInfo.stream().filter(t->t.facebook_id()!=null).forEach(t->Assert.assertNotNull(t.role().contains(ROLE.ROLE_Client_Verified)));
-        clientsInfo.stream().filter(t->t.linkedin_id()!=null).forEach(t->Assert.assertNotNull(t.role().contains(ROLE.ROLE_Client_Verified)));
+        clientsInfo.stream().filter(t->t.google_id()!=null).forEach(t->Assert.assertTrue(t.role().contains(ROLE.ROLE_Client_Verified.getRole())));
+        clientsInfo.stream().filter(t->t.linkedin_id()!=null).forEach(t->Assert.assertTrue(t.role().contains(ROLE.ROLE_Client_Verified.getRole())));
+        clientsInfo.stream().filter(t->t.facebook_id()!=null).forEach(t->Assert.assertTrue(t.role().contains(ROLE.ROLE_Client_Verified.getRole())));
+
     }
 }

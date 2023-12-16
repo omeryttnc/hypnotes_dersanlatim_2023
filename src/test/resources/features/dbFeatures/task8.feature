@@ -11,6 +11,7 @@
 #facebook google ve linkedin den kullanarak hesap acan kullanicilarin sayilarini bulur ve bu kullanicilarinin hepsinin roles lerinde ROLE_CLIENT_VERIFIED oldugunun assertion i yaparsiniz
 # (eger bir kullanici mesela google kullanarak hesap actiysa google id si oluyor database de ve role turunu enum dan cekebilirseniz onun da son tekrarini yapmis oluruz ) (edited)
 
+  @DB
 Feature: Client Table assertion
 
   Background:

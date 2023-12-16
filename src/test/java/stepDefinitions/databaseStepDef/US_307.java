@@ -6,16 +6,16 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import pages.CommonPage;
+
 import utilities.BrowserUtilities;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static stepDefinitions.databaseStepDef.DatabaseMysql.resultSet;
+import static utilities.DatabaseUtilities.*;
 
 
 public class US_307 extends CommonPage {
-    String title= Faker.instance().address().country();
+    String title= Faker.instance().address().country().replaceAll("'","");
     String address="Freedom Street";
     String zipcode="12345";
 
