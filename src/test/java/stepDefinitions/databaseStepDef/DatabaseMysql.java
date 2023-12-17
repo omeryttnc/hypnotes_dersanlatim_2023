@@ -6,12 +6,25 @@ import utilities.API;
 import utilities.CLIENTS_API;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static utilities.DatabaseUtilities.*;
 
 public class DatabaseMysql extends TestCase {
+
+    public static ResultSet executeQuery(String sql) {
+
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return resultSet;
+    }
 
     public CreatedClient getLastCreatedClient() {
         getConnection();
@@ -66,12 +79,12 @@ public class DatabaseMysql extends TestCase {
         return map;
     }
 
-    public record CreatedClient(int userID, String userEmail, String firstName, String lastName) { }
-
+    public record CreatedClient(int userID, String userEmail, String firstName, String lastName) {
+    }
 
     public class CreatedClient_CLass {
         private int userID;
-        private String userEmail,firstName,lastName;
+        private String userEmail, firstName, lastName;
 
         public CreatedClient_CLass(int userID, String userEmail, String firstName, String lastName) {
             this.userID = userID;
@@ -110,5 +123,39 @@ public class DatabaseMysql extends TestCase {
 //        assertEquals(client.email(), lastCreatedClient.userEmail());
 //
 //    }
+
+    //-----------------------Task 8-----------------------------------------------
+    public List<CreatedClientDB> getAllClientsInfo(){
+        getConnection();
+        List<CreatedClientDB> allClientsInfo=new ArrayList<>();
+        CreatedClientDB client=null;
+
+        try {
+            statement=connection.createStatement();
+            resultSet=statement.executeQuery("Select * from `client`");
+
+            while (resultSet.next()){
+                client=new CreatedClientDB(
+                        resultSet.getInt("id"),
+                        resultSet.getString("email"),
+                        List.of(resultSet.getString("roles").replaceAll("[\\[\\]\"]","").split(",")),
+                        resultSet.getString("password"),
+                        resultSet.getString("created"),
+                        resultSet.getString("google_id"),
+                        resultSet.getString("linkedin_id"),
+                        resultSet.getString("facebook_id")
+                );
+                allClientsInfo.add(client);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return allClientsInfo;
+    }
+
+    public record CreatedClientDB(int userID, String userEmail, List<String> role,String password, String createdDate,String google_id,String linkedin_id,String facebook_id) {
+    }
 
 }

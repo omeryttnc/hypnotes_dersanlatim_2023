@@ -17,6 +17,7 @@ public abstract class CommonPage {
     private ServicesPage servicesPage;
     private ClientPage clientPage;
     private DocumentsPage documentsPage;
+    private SettingsPage settingsPage;
 
     public DocumentsPage getDocumentsPage() {
         if (documentsPage == null) {
@@ -57,6 +58,12 @@ public abstract class CommonPage {
             servicesPage= new ServicesPage();
         }
         return servicesPage;
+    }
+    public SettingsPage getSettingsPage(){
+        if(settingsPage==null){
+            settingsPage= new SettingsPage();
+        }
+        return settingsPage;
     }
 
 }

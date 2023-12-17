@@ -13,7 +13,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 
 import static stepDefinitions.Hooks.actions;
 import static stepDefinitions.Hooks.driver;
@@ -148,4 +151,14 @@ public class BrowserUtilities {
         return newFile;
 
     }
+public static boolean isDatePast(String date){
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        boolean flag=false;
+    try {
+        flag=simpleDateFormat.parse(date).compareTo(new Date())<0;
+    } catch (ParseException e) {
+        throw new RuntimeException(e);
+    }
+    return flag;
+}
 }
